@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    {# SECTION AGE #}
+    Enter year of birth !
+    <input type="text" name="year" value="" id="year">
+    <div id="age"></div>
+
+    {# SECTION ARTICLE #}
+    <div id="count_of_article"></div>
+
+    {# SECTION ARTICLE #}
+    <div id="model"></div>
+    <div id="brand"></div>
+    <div id="price"></div>
+    <div id="qty"></div>
+    <div id="color_name"></div>
+
+
+    <!-- ADD AXIOS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+        integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+        crossorigin="anonymous"></script>
+    <script>
+        // SECTION AGE FOR EXAMPLE
+        const htmlAge = document.getElementById('age')
+        document.getElementById('year').addEventListener('change', (e) => {
+            console.log(e.target.value)
+            axios.get('/api/get_age/' + e.target.value)
+                .then(response => response.data)
+                .then(data => htmlAge.innerHTML = data)
+        })
+
+        // SECTION ARTICLES COUNT
+        
+        // SECTION ARTICLE DISPLAY
+    </script>
+</body>
+
+</html>
