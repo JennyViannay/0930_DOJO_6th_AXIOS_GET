@@ -12,36 +12,60 @@
     {# SECTION AGE #}
     Enter year of birth !
     <input type="text" name="year" value="" id="year">
-    <div id="age"></div>
+    <div>Age : <p id="age"></p></div>
 
     {# SECTION ARTICLE #}
-    <div id="count_of_article"></div>
+    <div>Count of articles : <p id="count_of_article"></p></div>
 
     {# SECTION ARTICLE #}
-    <div id="model"></div>
-    <div id="brand"></div>
-    <div id="price"></div>
-    <div id="qty"></div>
-    <div id="color_name"></div>
+    <div>Model <p id="model"></p></div>
+    <div>Brand <p id="brand"></p></div>
+    <div>Price <p id="price"></p></div>
+    <div>QTY <p id="qty"></p></div>
+    <div>Color <p id="color_name"></p></div>
 
+   <div id="link"></div>
 
     <!-- ADD AXIOS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
         integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
         crossorigin="anonymous"></script>
     <script>
-        // SECTION AGE FOR EXAMPLE
         const htmlAge = document.getElementById('age')
-        document.getElementById('year').addEventListener('change', (e) => {
-            console.log(e.target.value)
-            axios.get('/api/get_age/' + e.target.value)
+        document.getElementById('year').addEventListener('change', (event) => {
+            console.log(event.target.value)
+            axios.get('/api/get_age/' + event.target.value)
                 .then(response => response.data)
                 .then(data => htmlAge.innerHTML = data)
         })
 
-        // SECTION ARTICLES COUNT
+        // SECTION ARTICLES 
+        const htmlCount = document.getElementById('count_of_article')
+        const htmlLink = document.getElementById('link')
+        axios.get('/api/all_articles')
+        .then(response => response.data)
+        .then(data => {
+            htmlCount.innerHTML = data.length
+        })
         
-        // SECTION ARTICLE DISPLAY
+        // SECTION ARTICLE DISPLAY // id = 1
+        document.getElementById('link').addEventListener('link', (e) => {
+            const htmlModel = document.getElementById('model')
+            const htmlBrand = document.getElementById('brand')
+            const htmlPrice = document.getElementById('price')
+            const htmlQty = document.getElementById('qty')
+            const htmlColor = document.getElementById('color_name')
+
+            axios.get('/api/show_article/' + article.id)
+            .then(response => response.data)
+            .then(data => {
+                htmlModel.innerHTML = data.model
+                htmlBrand.innerHTML = data.brand_name
+                htmlPrice.innerHTML = data.price
+                htmlQty.innerHTML = data.qty
+                htmlColor.innerHTML = data.color_name
+            })
+        })
     </script>
 </body>
 
